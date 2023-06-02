@@ -1,7 +1,5 @@
 "use client";
-
 require("../polyfill");
-
 import { useState, useEffect } from "react";
 
 import styles from "./home.module.scss";
@@ -14,13 +12,9 @@ import { getCSSVar, useMobileScreen } from "../utils";
 import dynamic from "next/dynamic";
 import { Path, SlotID } from "../constant";
 import { ErrorBoundary } from "./error";
+import { AppRoutes } from "../routes";
 
-import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { SideBar } from "./sidebar";
 import { useAppConfig } from "../store/config";
 
@@ -120,16 +114,7 @@ function Screen() {
       }
     >
       <SideBar className={isHome ? styles["sidebar-show"] : ""} />
-
-      <div className={styles["window-content"]} id={SlotID.AppBody}>
-        <Routes>
-          <Route path={Path.Home} element={<Chat />} />
-          <Route path={Path.NewChat} element={<NewChat />} />
-          <Route path={Path.Masks} element={<MaskPage />} />
-          <Route path={Path.Chat} element={<Chat />} />
-          <Route path={Path.Settings} element={<Settings />} />
-        </Routes>
-      </div>
+      <div className={styles["window-content"]} id={SlotID.AppBody}></div>
     </div>
   );
 }
@@ -143,9 +128,7 @@ export function Home() {
 
   return (
     <ErrorBoundary>
-      <Router>
-        <Screen />
-      </Router>
+      <Screen />
     </ErrorBoundary>
   );
 }
